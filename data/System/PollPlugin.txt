@@ -1,0 +1,126 @@
+---+!! !PollPlugin
+<!--
+One line description, required for extensions repository catalog.
+   * Set SHORTDESCRIPTION = Enables voting on topics
+-->
+%SHORTDESCRIPTION%
+
+%TOC%
+
+---++ Description
+The plugin allows you to setup polls and let wiki users vote for it.
+A poll includes one or more suggestions/innovations/ideas (e.g.) to vote for, 
+which are described in a topic for each suggestion. Treat those topic as an idea, suggestion or
+innovation you want to get voted.
+   
+There is a configuration topic for each poll to define all users and to set 
+a number of credit points for them. All these users can now participate
+in that poll and share their credit points out on sevaral topics belonging to the poll.
+
+---++ Usage
+
+---+++ Setup new poll
+To setup a new poll simply add =%<nop>POLLSETUP%= to a topic. 
+It will automatically inserts the necessary table for configuration: 
+
+| *Header* | *Description* | 
+| username | name of wikiuser who participate |
+| credit points | number of remaining credit points to share out |
+| latest vote | datetime of users last vote |
+| comment | use it for any comment about that user | 
+
+Each table row defines a wikiuser and a number of credit points. 
+Add as many wikiusers as you want to join your poll.
+
+Additionally another table will be inserted which is used for logging
+all submitted votes. Do not touch this table!
+
+| *Column:* | *Description:* |
+| date | date of that log entry |
+| username | name of wikiuser who has voted |
+| topic | name of topic which has been voted |
+| credit points | number of shared credit points on that topic |
+
+__Note:__ Do not touch this table! It is updating automatically. Any editing manually
+will mix up the poll stats.
+
+---+++ Include topic
+To include a topic into a poll simply add =%<nop>POLL{...}%= to a topic. 
+
+Supported parameters:
+
+| *Parameter:* | *Description:* | *Default:* |
+| =topic=""= | The topic which contains the necessary poll configuration | Current topic |
+| =disable=""= | Set disable="1" to disable voting for the current topic | 0 | 
+
+The makro renders a form to submit credit points and vote for the current topic. 
+It also adds additional information about the poll:
+
+| *Row:* | *Description:* |
+| topic score | Total of all shared credit points on the current topic |
+| credit points shared | Total of all shared credit points on the current topic from logged in user |
+| credit points left | Remaining credit points for that poll of logged in user | 
+
+You can include as many topics as you want to be part of the poll and get voted by participating users.
+
+---++ Examples
+
+---+++ Poll configuraton
+*Poll setup*
+<!-- DO NOT CHANGE TABLE ORDER -->
+| *username* | *credit points* | *latest vote* | *comment* |
+| Main.JohnConnor | 9 | - | just an example wikiuser |
+| Main.ThomasAnderson | 15 | - | - |
+
+*Poll log*
+<!-- DO NOT EDIT THIS TABLE -->
+| *date* | *username* | *topic* | *credit points* |
+| 12. Jul 2009 - 10:33:07 | Main.JohnConnor | Main.MoreFreshFruits | 7 |
+| 07. Jul 2009 - 15:03:30 | Main.JohnConnor | Main.LessTerminatorSequels | 4 |
+| 03. Jul 2009 - 11:28:01 | Main.ThomasAnderson | Main.MoreITSupport | 5 |
+
+---+++ Voting
+
+| *topic score: 7* ||
+| credit points shared: | 11 |
+| credit points left: | 9 |
+| *Vote for it* | *<form action="#"><input type="text" size="3" /> <input type="button" value="vote!" class="foswikiButton" /></form>* |
+
+---++ Installation Instructions
+
+__Note:__ You do not need to install anything in the browser to use this extension. 
+The following instructions are for the administrator who installs the extension on the server:
+
+   * Open configure, and open the "Extensions" section. 
+   * Use "Find More Extensions" to get a list of available extensions. 
+   * Select "Install".
+
+You can also visit the Plugin Home for a manually installation:
+
+   * Download the ZIP file from the [[http://foswiki.org/bin/view/Extensions/PollPlugin][Plugin Home]]
+   * Unzip ==%TOPIC%.zip== in your Foswiki installation directory. Content:
+     | *File:* | *Description:* |
+     | ==data/System/%TOPIC%.txt== | Plugin topic |
+     | ==lib/Foswiki/Plugins/%TOPIC%.pm== | Plugin Perl module |
+   * Run the [[%SCRIPTURL%/configure%SCRIPTSUFFIX%][configure]] script, and enable the plugin in the {Plugins} section.
+   * Add =%<nop>POLLSETUP%= to a topic to test if the installation was successful.
+
+---++ Info
+
+Many thanks to the following sponsors for supporting this work:
+
+[[http://www.reifenhauser-group.com/en/index.asp][<img src="%ATTACHURLPATH%/reifenhauser-logo.gif" border="0" alt="Reifenhaeuser !GmbH & Co. KG Maschinenfabrik" />]]
+
+[[http://www.reifenhauser-group.com/en/index.asp][Reifenh&auml;user GmbH & Co. KG Maschinenfabrik]]
+
+|  Author(s): | Foswiki:Main.SvenHess |
+|  Copyright: | &copy; 2009, Foswiki:Main.SvenHess |
+|  License: | [[http://www.gnu.org/licenses/gpl.html][GPL (Gnu General Public License)]] |
+|  Version: | 1.0 |
+|  Change History: | <!-- versions below in reverse order -->&nbsp; |
+| 08 July 2009: | Initial version |
+|  Dependencies: | none |
+|  Home page: | http://foswiki.org/bin/view/Extensions/PollPlugin |
+|  Support: | http://foswiki.org/bin/view/Support/PollPlugin |
+
+<!-- Do _not_ attempt to edit this topic; it is auto-generated. -->

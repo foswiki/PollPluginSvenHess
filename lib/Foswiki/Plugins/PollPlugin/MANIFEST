@@ -1,0 +1,4 @@
+# Release manifest for PollPlugin
+data/System/PollPlugin.txt 0644 Documentation
+lib/Foswiki/Plugins/PollPlugin.pm 0644 Perl module
+
